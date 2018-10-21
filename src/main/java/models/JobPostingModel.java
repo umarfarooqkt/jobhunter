@@ -26,28 +26,28 @@ public class JobPostingModel implements Serializable {
 	private String created_at;
 	
 	@Column(name="title")
-    private String title;
-	
+	private String title;
+
 	@Column(name="location")
-    private String location;
+	private String location;
 	
 	@Column(name="type")
-    private String type;
+	private String type;
 	
 	@Column(name="description")
-    private String description;
+	private String description;
 	
 	@Column(name="how_to_apply")
-    private String how_to_apply;
+	private String how_to_apply;
 	
 	@Column(name="company")
-    private String company;
+	private String company;
 	
 	@Column(name="company_url")
-    private String company_url;
+	private String company_url;
 	
 	@Column(name="url")
-    private String url;
+	private String url;
 	
 	private String company_logo;
     
