@@ -25,7 +25,7 @@ public class DataCollectorService {
 			URI = URI + "page=" + page;
 		}
 		Client client = ClientBuilder.newClient();
-	    GenericType<List<JobPostingModel>> genericList = new GenericType<List<JobPostingModel>>() {};
+		GenericType<List<JobPostingModel>> genericList = new GenericType<List<JobPostingModel>>() {};
 		List<JobPostingModel> jobPostingList = client
 				.target(URI)
 				.request(MediaType.APPLICATION_JSON)
