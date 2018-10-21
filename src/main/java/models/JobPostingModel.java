@@ -144,7 +144,7 @@ public class JobPostingModel implements Serializable {
 	
 	@Override
 	public String toString() {
-		String values = id + ", " + company + ", " + "NULL" 
+		String values = id + ", " + company + ", " +  company_logo
 				+ ", " + company_url + ", " + created_at + ", " 
 				+ description + ", " + how_to_apply + ", " + location
 				+ title + ", " + type + ", " + url +" ";
