@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import models.JobPostingModel;
+import models.QueryMap;
 
 public class DatabaseManager {
 
@@ -102,14 +103,31 @@ public class DatabaseManager {
     }
     
     /**
-     * This method gets all the job postings with the specific title
-     * @return {List<JobPostingModel>}
+     * This method gets all the job postings with the specific Query, this is only used for contains
+     * meaning that only jobs attributes with exact matching
+     * @param String [queryType] this is the key for QueryMap; Refer to map for keys {Only keys that use contains}
+     * @param String [type] => this is the string that will be searched for
+     * @return {List<JobPostingModel>} The return type for
      */
-    public static List<JobPostingModel> retriveJobPostingsWith(String type) {
-    	Query query = em.createNativeQuery(""
-    			+ "SELECT * FROM jobposting "
-    			+ "ORDER BY created_at ASC"
-    			+ "WHERE title = :thistitle", JobPostingModel.class).setParameter("thistitle", type);
+    public static List<JobPostingModel> retriveJobspostingsWith(String queryType, String type) {
+    	Query query = em.createNativeQuery(QueryMap.getQuery(queryType), JobPostingModel.class);
+    	query.setParameter(1, type);
+    	List<JobPostingModel> Joblist = query.getResultList();
+    	return Joblist;
+    }
+    
+    /**
+     * This method gets all the jobs postings with matching; jobpostings with
+     *  the attribute/ database column pattern matching the type will be returned
+     * @param [queryType] this is the key for QueryMap; Refer to map
+     * for keys {Only keys that use matches} the Keys correspond to jobposting table columns
+     * @param [type]
+     * @return
+     */
+    public static List<JobPostingModel> retriveJobspostingsMatching(String queryType, String type) {
+    	String appendedType = "%"+type+"%";
+    	Query query = em.createNativeQuery(QueryMap.getQuery(queryType), JobPostingModel.class);
+    	query.setParameter(1, appendedType);
     	List<JobPostingModel> Joblist = query.getResultList();
     	return Joblist;
     }
