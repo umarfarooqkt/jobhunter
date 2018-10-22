@@ -22,6 +22,10 @@ import models.JobPostingModel;
 @Path("/joblist") 
 public class ServiceManager {
 
+	/**
+	 * This method returns all the jobpostings
+	 * @return response with json
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/all")
@@ -30,6 +34,11 @@ public class ServiceManager {
 		return Response.ok(list).build();
 	}
 
+	/**
+	 * This method returns exact job postings with title for the paramValue
+	 * @param title
+	 * @return
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/containstitle")
@@ -38,6 +47,11 @@ public class ServiceManager {
 		return Response.ok(list).build();
 	}
 
+	/**
+	 * This method returns exact job postings with company for the paramValue
+	 * @param company
+	 * @return
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/containscompany")
@@ -46,6 +60,11 @@ public class ServiceManager {
 		return Response.ok(list).build();
 	}
 
+	/**
+	 * This method returns exact job postings with location for the paramValue
+	 * @param location
+	 * @return
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/containslocation")
@@ -54,20 +73,42 @@ public class ServiceManager {
 		return Response.ok(list).build();
 	}
 
+	/**
+	 * This method returns exact job postings with type for the paramValue
+	 * @param type
+	 * @return
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/containstype")
 	public Response getJobPostingsWithDate(@QueryParam("type") String type) {
-		List<JobPostingModel> list = DatabaseManager.retriveJobspostingsWith("created_at",type);
+		List<JobPostingModel> list = DatabaseManager.retriveJobspostingsWith("containsType",type);
 		return Response.ok(list).build();
 	}
 
+	/**
+	 * This method returns a pattern matched job postings with description for the paramValue
+	 * @param description
+	 * @return
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/matchdescription")
-	public Response getJobPostingsWithDescription(@QueryParam("description") String type) {
+	public Response getJobPostingsMatchDescription(@QueryParam("description") String type) {
 		List<JobPostingModel> list = DatabaseManager.retriveJobspostingsMatching("descriptionMatches",type);
 		return Response.ok(list).build();
 	}
 
+	/**
+	 * This method returns a pattern matched job postings with title for the paramValue
+	 * @param description
+	 * @return
+	 */
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/matchtitle")
+	public Response getJobPostingsMatchTitle(@QueryParam("title") String type) {
+		List<JobPostingModel> list = DatabaseManager.retriveJobspostingsMatching("titleMatches",type);
+		return Response.ok(list).build();
+	}
 }

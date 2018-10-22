@@ -43,7 +43,7 @@ public class DatabaseManager {
     	transaction = em.getTransaction();
     	transaction.begin();
     	String queryString = "INSERT IGNORE INTO jobposting " + 
-    			"VALUES ('?','?','?','?','?','?','?','?','?','?','?')";
+    			"VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)";
     	Query query = em.createNativeQuery(queryString);
     	query.setParameter(1, jobPosting.getId());
     	query.setParameter(2, jobPosting.getCompany());
